@@ -1,0 +1,281 @@
+$colors: (
+	menu: #cfcfcf,
+	background: #fff,
+	navlink: #556
+	);
+
+$fonts: (
+	menu: 'Catamaran, sans-serif'
+	);
+
+@mixin top-menu() {
+	height: 50px;
+	line-height: 50px;
+	font-family: 'Catamaran', sans-serif;
+	li {
+		display: inline-block;
+		width: 100px;
+		text-align: center;
+		position: relative;
+		a {
+			display: block;
+			text-decoration: none;
+			font-weight: bold;
+			color: map-get($colors, 'navlink');
+			span {
+				display: block;
+				position: relative;
+				z-index: 2;
+				transition: all .5s;
+			}
+				&:after {
+				content: '';
+				display: block;
+				height: 50px;
+				width: 100px;
+				background-color: #aaa;
+				top: 0;
+				left: 50px;
+				position: absolute;
+				transition: all .3s;
+				transform: skew(10deg);
+				width: 0;
+				z-index: 1;
+				opacity: 0;
+			}
+			&:hover {
+				color: #fff;
+			}
+			&:hover:after {
+					width: 100%;
+					left: 0;
+					opacity: 1;
+				}
+		}
+	}
+}
+
+@mixin post() {
+	//border-bottom: 1px solid #222;
+	margin-top: 25px;
+	width: 75%;
+	float: left;
+}
+
+
+
+body {
+	background-color: map-get($colors, 'background');
+	width: 100%;
+	//font-family: 'Josefin Sans', sans-serif;
+	font-family: 'Catamaran', sans-serif;
+	font-size: 1.4em;
+}
+
+#header-wrap {
+	width: 850px;
+	margin: 0 auto;
+	img {
+		margin: 20px auto;
+	}
+}
+
+#top-nav-wrap {
+	height: 50px;
+	background-color: map-get($colors, 'menu');
+	width: 100%;
+	#top-nav {
+		width: 850px;
+		margin: 0 auto;
+		overflow: hidden;
+		display: inline;
+	}
+}
+
+header {
+	width: 100%;
+	#about-menu {
+		@include top-menu();
+		float: left;
+	}
+
+	#links {
+		@include top-menu();
+		float: right;
+		li a:after {
+			transform: skew(-10deg);
+		}
+	}
+
+		#main-nav-wrap {
+		width: 100%;
+		border-top: 1px solid #222;
+		border-bottom: 1px solid #222;
+
+		#main-nav {
+			width: 800px;
+			margin: 0px auto;
+			position: relative;
+			height: 33px;
+
+			li {
+				display: inline-block;
+				width: 100px;
+				text-align: center;
+				height: 33px;
+				filter: grayscale(100%);
+				transition: all .4s;
+				position: relative;
+				a {
+					height: 33px;
+					line-height: 33px;
+					color: rgba(255,255,255,0);
+					display: block;
+					position: relative;
+					
+						&::after {
+							transition: all .4s;
+							content: attr(title);
+							opacity: 0;
+							visibility: hidden;
+							position: absolute;
+							left: 0px;
+							top: -50px;
+							width: 100px;
+							height: 25px;
+							color: #222;
+						}
+					}
+				&:hover {
+					filter: grayscale(0%);
+					a::after {
+						top: -30px;
+						visibility: visible;
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+}
+
+.container {
+	width: 950px;
+	margin: 20px auto;
+	position: relative;
+	.post-wrap {
+		@include post();
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+		.post-title {
+			font-size: 2em;
+		}
+		.post-author {
+			font-size: 1.3em;
+			font-style: italic;
+		}
+		.post-categories li {
+			display: inline-block;
+		}
+	}
+}
+
+#sidebar {
+	position: absolute;
+	right: -40px;
+	width: 200px;
+	font-size: 1em;
+	float: right;
+	h2 {
+		font-size: 1.5em;
+	}
+}
+
+#searchform {
+	display: inline;
+	position: absolute;
+	top: 0px;
+	right: 50px;
+	height: 30px;
+	label {
+		position: absolute;
+		&::after {
+			background: url('../_img/search.png') no-repeat 0 0;
+			background-size: 100%;
+			content: '';
+			width: 25px;
+			height: 25px;
+			position: absolute;
+			top: 2px;
+			left: 0;
+			z-index: 5;
+			cursor: pointer;
+		}
+	}
+	input {
+		background-color: #fff;
+		width: 35px;
+		height: 22px;
+		transition: all .5s;
+		position: absolute;
+		border: none;
+		border-bottom: 1px solid #fff;
+		padding-left: 25px;
+		margin-top: 3px;
+		&[value='Search'] {
+			display: none;
+		}
+		&:focus {
+			width: 150px;
+			outline: none;
+			border-bottom: 1px solid #222;
+		}
+	}
+}
+
+.cat-item {
+	a {
+		color: #fff;
+		text-decoration: none;
+		font-family: 'Montserrat';
+		font-weight: bold;
+		display: none;
+	}
+	&:first-child{
+		background-image: url('../_img/food-all.jpg'); // Replace with my images on each child element.
+		background-size: 100%;
+	}
+	&:nth-child(2) {
+		background-image: url('../_img/food-bacon.jpg');
+		background-size: 100%;
+	}
+	&:nth-child(3) {
+		background-image: url('../_img/food-breakfast.jpg');
+		background-size: 100%;
+	}
+	&:nth-child(4) {
+		background-image: url('../_img/food-dessert.jpg');
+		background-size: 100%;
+	}
+	&:nth-child(5) {
+		background-image: url('../_img/food-healthy.jpg');
+		background-size: 100%;
+	}
+	&:nth-child(6) {
+		background-image: url('../_img/food-vegetarian.jpg');
+		background-size: 100%;
+	}
+}
+
+#store {
+		background-image: url('../_img/store.jpg');
+		background-size: 70%;
+		a {
+		color: #fff;
+		text-decoration: none;
+		font-family: 'Montserrat';
+		font-weight: bold;
+	}
+}
