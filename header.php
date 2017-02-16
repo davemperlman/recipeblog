@@ -2,8 +2,9 @@
 <html>
 	<head>
 		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="https://fonts.googleapis.com/css?family=Catamaran:100|Josefin+Sans:100|Montserrat:400" rel="stylesheet">
-		<link rel="stylesheet" href="_css/style.css">
+		<!-- <link rel="stylesheet" href="_css/style.css"> -->
 		<?php wp_head(); ?>
 	</head>
 	<body>
@@ -24,20 +25,19 @@
 				</div>
 			</div>
 			<div id="header-wrap">
-				<img src="http://placehold.it/850x150"> <!-- This is for the main logo or banner -->
+				<img src="http://placehold.it/414x150"> <!-- This is for the main logo or banner -->
 			</div>
 				<div id='main-nav-wrap'>
 					<ul id="main-nav">
 						<!-- This is for links to different categories or different content/search bar -->
-						<?php wp_list_categories('title_li'); ?>
-						<li id="store"><a href="#" title='Store'>Store</a></li>
-						<form role="search" method="get" id="searchform" class="searchform" action="http://moistpie.servebeer.com/dave/projects/wordpress/">
-							<div>
-								<label class="screen-reader-text" for="s"></label>
-								<input type="text" value="" name="s" id="s" placeholder="Search">
-								<input type="submit" id="searchsubmit" value="Search">
-							</div>
-						</form>
+						<label for="menu-activator-box" id="menu-activator" data-title='Menu'></label>
+						<input type="checkbox" id="menu-activator-box">
+						<label for="search-activator-box" id="search-activator"></label>
+						<input type="checkbox" id="search-activator-box">
+						<?php wp_nav_menu(array(
+						'menu' => 'custom',
+						'container' => false)); ?>
+						<?php get_search_form(); ?>
 					</ul>
 				</div>
 		</header>
